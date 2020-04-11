@@ -5,7 +5,7 @@
 //  Created by Anat Gilboa on 10/18/2017.
 //  Copyright (c) 2017 ag. All rights reserved.
 //
-
+import UIKit
 import SnapKit
 
 public class PickerView: UIView {
@@ -253,7 +253,7 @@ extension PickerView : UIScrollViewDelegate {
         let distanceToOverlayLeftEdge = selectedItemOverlay.frame.origin.x - collectionView.frame.origin.x
         let targetCellLeftEdge = targetXOffset + distanceToOverlayLeftEdge
         let differences = xOffsets.map { fabs(Double($0 - targetCellLeftEdge)) }
-        guard let min = differences.min(), let position = differences.index(of: min) else { return }
+        guard let min = differences.min(), let position = differences.firstIndex(of: min) else { return }
         let actualOffset = xOffsets[position] - distanceToOverlayLeftEdge
         targetContentOffset.pointee.x = actualOffset
         delegate?.scrollViewWillEndDragging?(self, withVelocity: velocity, targetContentOffset: targetContentOffset)
@@ -268,7 +268,7 @@ extension PickerView : UIScrollViewDelegate {
         let leftIndex = Int(floor(scrollProgress))
         let rightIndex = Int(ceil(scrollProgress))
         let interCellProgress = scrollProgress - CGFloat(leftIndex)
-        let deltaFromMiddle = fabs(0.5 - interCellProgress)
+        let deltaFromMiddle = abs(0.5 - interCellProgress)
         let (this, next) = (vm.cells[safe: leftIndex]?.isSelectable ?? false,
                             vm.cells[safe: rightIndex]?.isSelectable ?? false)
         let dotScale: CGFloat

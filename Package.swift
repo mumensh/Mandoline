@@ -21,5 +21,8 @@ let package = Package(
             dependencies: ["SnapKit"],
             path: "Mandoline/Classes"
         ),
+    ],
+    swiftLanguageVersions: [
+        .v5
     ]
 )

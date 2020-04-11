@@ -6,7 +6,7 @@
 //  Copyright (c) 2017 ag. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension CGFloat {
     var isIntegral: Bool {
